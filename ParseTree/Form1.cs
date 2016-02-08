@@ -34,8 +34,13 @@ namespace ParseTree
 
       FillRoot(noderoot, 1);
       collectNegbor();
-      System.Diagnostics.Debug.WriteLine(noderoot.Left.Data + "->" + noderoot.Left.Neighbour.Data + "->" + noderoot.Left.Neighbour.Neighbour);
-      System.Diagnostics.Debug.WriteLine(noderoot.Left.Left.Data + "->" + noderoot.Left.Left.Neighbour.Data + "->" + noderoot.Left.Left.Neighbour.Neighbour.Data + "->" + noderoot.Left.Left.Neighbour.Neighbour.Neighbour);
+      string lnode1 = (noderoot.Neighbour == null) ? "null" : noderoot.Neighbour.ToString();
+      string lnode2 = (noderoot.Left.Neighbour.Neighbour == null) ? "null" : noderoot.Left.Neighbour.Neighbour.ToString();
+      string lnode3 = (noderoot.Left.Left.Neighbour.Neighbour.Neighbour == null) ? "null" : noderoot.Left.Left.Neighbour.Neighbour.Neighbour.ToString();
+      listBox1.Items.Add(noderoot.Data.ToString() + "->" + lnode1);
+
+      listBox1.Items.Add(noderoot.Left.Data.ToString() + "->" + noderoot.Left.Neighbour.Data.ToString() + "->"  + lnode2);
+      listBox1.Items.Add (noderoot.Left.Left.Data.ToString() + "->" + noderoot.Left.Left.Neighbour.Data + "->" + noderoot.Left.Left.Neighbour.Neighbour.Data.ToString() + "->" + lnode3);
     }
 
     private void collectNegbor()
