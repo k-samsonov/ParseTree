@@ -21,11 +21,11 @@ namespace ParseTree
 
       levels = new Dictionary<int, List<Node>>();
       noderoot = new Node(1);
-      
+
       noderoot.Left = new Node(2);
       noderoot.Right = new Node(3);
 
-      noderoot.Left.Left  = new Node(4);
+      noderoot.Left.Left = new Node(4);
       //noderoot.Left.Right = new Node(5);
       noderoot.Right.Left = new Node(6);
       noderoot.Right.Right = new Node(7);
@@ -39,8 +39,8 @@ namespace ParseTree
       string lnode3 = (noderoot.Left.Left.Neighbour.Neighbour.Neighbour == null) ? "null" : noderoot.Left.Left.Neighbour.Neighbour.Neighbour.ToString();
       listBox1.Items.Add(noderoot.Data.ToString() + "->" + lnode1);
 
-      listBox1.Items.Add(noderoot.Left.Data.ToString() + "->" + noderoot.Left.Neighbour.Data.ToString() + "->"  + lnode2);
-      listBox1.Items.Add (noderoot.Left.Left.Data.ToString() + "->" + noderoot.Left.Left.Neighbour.Data + "->" + noderoot.Left.Left.Neighbour.Neighbour.Data.ToString() + "->" + lnode3);
+      listBox1.Items.Add(noderoot.Left.Data.ToString() + "->" + noderoot.Left.Neighbour.Data.ToString() + "->" + lnode2);
+      listBox1.Items.Add(noderoot.Left.Left.Data.ToString() + "->" + noderoot.Left.Left.Neighbour.Data + "->" + noderoot.Left.Left.Neighbour.Neighbour.Data.ToString() + "->" + lnode3);
     }
 
     private void collectNegbor()
@@ -49,27 +49,23 @@ namespace ParseTree
       {
         level.Add(null);
       }
-      foreach (List<Node> level in levels.Values )
+      foreach (List<Node> level in levels.Values)
       {
-        
+
         Node previouse = null;
         foreach (Node node in level)
         {
-          if (previouse == null)
-          {
-            previouse = node;
-          }
-          else
+          if (previouse != null)
           {
             previouse.Neighbour = node;
-            previouse = node;
           }
+          previouse = node;
         }
       }
 
     }
 
-    private void FillRoot( Node node, int level)
+    private void FillRoot(Node node, int level)
     {
 
       if (node == null)
@@ -85,14 +81,14 @@ namespace ParseTree
       if (node.Left != null)
       {
         levels[level].Add(node.Left);
-        Node nd= node.Left ;
-        FillRoot( nd, NextLevel);
+        Node nd = node.Left;
+        FillRoot(nd, NextLevel);
       }
       if (node.Right != null)
       {
         levels[level].Add(node.Right);
-        Node nd= node.Right ;
-        FillRoot( nd, NextLevel);
+        Node nd = node.Right;
+        FillRoot(nd, NextLevel);
       }
     }
 
