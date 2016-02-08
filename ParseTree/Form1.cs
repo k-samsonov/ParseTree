@@ -21,8 +21,15 @@ namespace ParseTree
       m_NodesByLevels = new Dictionary<int, List<Node>>();
 
       CreateTree();
+      listBox1.Items.Add("Recursion");
       CollectNeighbour(noderoot, 1);
       LinkNeighbourNodes();
+      AddResultToList();
+
+
+      CreateTree();
+      listBox1.Items.Add(" no Recursion");
+      Connect(noderoot);
       AddResultToList();
     }
 
@@ -118,5 +125,31 @@ namespace ParseTree
     {
 
     }
+
+    void Connect(Node x)
+    {
+      while (x != null)
+      {
+        Node newStart = null, y = null;
+        while (x != null)
+        {
+          if (x.Left != null)
+            y = addNode(x.Left, y, ref newStart);
+          if (x.Right != null)
+            y = addNode(x.Right, y, ref newStart);
+          x = x.Neighbour;
+        }
+        x = newStart;
+      }
+    }
+
+    Node addNode(Node x, Node y, ref Node start)
+    {
+      return start == null ? start = x : y.Neighbour = x;
+    }
+
   }
+
+
+
 }
